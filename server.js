@@ -6,25 +6,7 @@ const path = require('path');
 const { sequelize } = require('./models');
 
 const app = express();
-// app.use(cors());
-// CORS configuration
-const allowedOrigins = [
-  'http://localhost:5173', // para desarrollo local (si usas Vite o React local)
-  'https://dataregion-frontend.vercel.app', // tu dominio exacto de Vercel
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    // Permite llamadas sin origen (ej. Postman o scripts internos)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    return callback(new Error('CORS bloqueado para este origen: ' + origin));
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
-}));
-
+app.use(cors());
 app.use(express.json());
 
 // static uploads
